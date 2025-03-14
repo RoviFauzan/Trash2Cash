@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Trash2Cash</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar yang diperbarui -->
+        <div class="sidebar text-white">
+            <div class="sidebar-header p-3 d-flex align-items-center gap-3">
+                <img src="/img/logo.png" alt="Trash2Cash" height="35" class="rounded">
+            </div>
+            
+            <div class="sidebar-divider my-2"></div>
+
+            <div class="sidebar-menu">
+                <div class="menu-label ps-3 mb-2">
+                    <small class="text-white-50 text-uppercase">Menu Utama</small>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="dashboard-admin.html" class="list-group-item list-group-item-action">
+                        <i class="fas fa-tachometer-alt me-2"></i>
+                        <span>Dashboard</span>
+                        <span class="badge rounded-pill bg-white text-success ms-auto">6</span>
+                    </a>
+                    <a href="users-admin.html" class="list-group-item list-group-item-action">
+                        <i class="fas fa-users me-2"></i>
+                        <span>Pengguna</span>
+                        <span class="badge rounded-pill bg-light text-dark ms-auto">50</span>
+                    </a>
+                    <a href="sampah-admin.html" class="list-group-item list-group-item-action">
+                        <i class="fas fa-recycle me-2"></i>
+                        <span>Data Sampah</span>
+                        <i class="fas fa-chevron-right ms-auto small"></i>
+                    </a>
+                </div>
+
+                <div class="menu-label ps-3 mb-2 mt-4">
+                    <small class="text-white-50 text-uppercase">Analisis</small>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="laporan-admin.html" class="list-group-item list-group-item-action active">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        <span>Laporan</span>
+                    </a>
+                    <a href="pengaturan-admin.html" class="list-group-item list-group-item-action">
+                        <i class="fas fa-cog me-2"></i>
+                        <span>Pengaturan</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="sidebar-divider my-2"></div>
+
+            <div class="sidebar-footer p-3">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User" class="rounded-circle me-2" width="32">
+                    <div class="user-info">
+                        <h6 class="mb-0">Admin User</h6>
+                        <small class="text-white-50">Super Admin</small>
+                    </div>
+                </div>
+                <a href="#help" class="btn btn-outline-light btn-sm w-100">
+                    <i class="fas fa-question-circle me-2"></i>Bantuan
+                </a>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white">
+                <div class="container-fluid">
+                    <button class="btn btn-link" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown me-3">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-bell"></i>
+                                <span class="badge bg-danger">3</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Laporan baru</a></li>
+                                <li><a class="dropdown-item" href="#">Pengajuan menunggu</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-shield me-2"></i>Admin
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#profile">Profil</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="index.html">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid py-4">
+                <!-- Quick Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card bg-gradient-success text-white">
+                            <div class="card-body">
+                                <h6 class="text-white">Total Pengumpulan</h6>
+                                <h3 class="mb-0">250 Kg</h3>
+                                <small><i class="fas fa-arrow-up"></i> 15% dari bulan lalu</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <h6 class="text-white">Total Poin Diberikan</h6>
+                                <h3 class="mb-0">1,250</h3>
+                                <small><i class="fas fa-star"></i> Dari 50 pengguna aktif</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-warning">
+                            <div class="card-body">
+                                <h6>Pengumpul Aktif</h6>
+                                <h3 class="mb-0">35</h3>
+                                <small>Dari 50 terdaftar</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-info">
+                            <div class="card-body">
+                                <h6>Pencapaian Target</h6>
+                                <h3 class="mb-0">75%</h3>
+                                <div class="progress mt-2" style="height: 5px;">
+                                    <div class="progress-bar" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Filter Controls -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                        <h6 class="m-0 font-weight-bold text-success">Filter & Kustomisasi</h6>
+                        <div class="btn-group">
+                            <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="collapse" data-bs-target="#filterOptions">
+                                <i class="fas fa-sliders-h me-1"></i>Opsi Filter
+                            </button>
+                            <button class="btn btn-outline-success btn-sm" id="saveView">
+                                <i class="fas fa-bookmark me-1"></i>Simpan Tampilan
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body collapse" id="filterOptions">
+                        <form class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Periode</label>
+                                <select class="form-select">
+                                    <option selected>Semua Periode</option>
+                                    <option>Harian</option>
+                                    <option>Mingguan</option>
+                                    <option>Bulanan</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Jenis Sampah</label>
+                                <select class="form-select" multiple>
+                                    <option selected>Plastik</option>
+                                    <option>Kertas/Kardus</option>
+                                    <option>Logam</option>
+                                    <option>Kaca</option>
+                                    <option>Elektronik</option>
+                                    <option>Organik</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Status Laporan</label>
+                                <select class="form-select">
+                                    <option selected>Semua Status</option>
+                                    <option>Selesai</option>
+                                    <option>Proses</option>
+                                    <option>Pending</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Tampilkan</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                    <label class="form-check-label">Grafik</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                    <label class="form-check-label">Tabel Detail</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Interactive Charts with Tooltips -->
+                <div class="row" id="chartSection">
+                    <div class="col-lg-6 mb-4">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-success">Perbandingan Pengumpulan Sampah</h6>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="wasteComparisonChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-success">Distribusi Jenis Sampah</h6>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="wasteTypeChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Table with Actions -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                        <h6 class="m-0 font-weight-bold text-success">Riwayat Laporan Detail</h6>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="input-group input-group-sm" style="width: 200px;">
+                                <input type="text" class="form-control" placeholder="Cari laporan...">
+                                <button class="btn btn-outline-secondary">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-success dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="fas fa-download me-1"></i>Export
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#"><i class="far fa-file-pdf me-2"></i>PDF</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="far fa-file-excel me-2"></i>Excel</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="far fa-file-csv me-2"></i>CSV</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Periode</th>
+                                        <th>Total Sampah (Kg)</th>
+                                        <th>Jumlah Pengguna</th>
+                                        <th>Total Poin</th>
+                                        <th>Kategori Terbanyak</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Januari 2025</td>
+                                        <td>75 Kg</td>
+                                        <td>35</td>
+                                        <td>375</td>
+                                        <td>Plastik (40%)</td>
+                                        <td><span class="badge bg-success">Selesai</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" title="Download"><i class="fas fa-download"></i></button>
+                                            <button class="btn btn-sm btn-success" title="Lihat Detail"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Desember 2023</td>
+                                        <td>60 Kg</td>
+                                        <td>30</td>
+                                        <td>300</td>
+                                        <td>Kertas (35%)</td>
+                                        <td><span class="badge bg-success">Selesai</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" title="Download"><i class="fas fa-download"></i></button>
+                                            <button class="btn btn-sm btn-success" title="Lihat Detail"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>November 2023</td>
+                                        <td>65 Kg</td>
+                                        <td>28</td>
+                                        <td>325</td>
+                                        <td>Logam (30%)</td>
+                                        <td><span class="badge bg-success">Selesai</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" title="Download"><i class="fas fa-download"></i></button>
+                                            <button class="btn btn-sm btn-success" title="Lihat Detail"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h6 class="font-weight-bold">Opsi Laporan</h6>
+                            <div class="row g-2">
+                                <div class="col-md-3">
+                                    <label class="form-label">Jenis Laporan</label>
+                                    <select class="form-select form-select-sm">
+                                        <option>Harian</option>
+                                        <option>Mingguan</option>
+                                        <option selected>Bulanan</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Format</label>
+                                    <select class="form-select form-select-sm">
+                                        <option>PDF</option>
+                                        <option selected>Excel</option>
+                                        <option>CSV</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Pilih Periode</label>
+                                    <input type="month" class="form-control form-control-sm" value="2025-01">
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button class="btn btn-success">
+                                        <i class="fas fa-file-export me-2"></i>Generate Laporan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Action Button for Quick Actions -->
+                <div class="position-fixed bottom-0 end-0 p-3">
+                    <div class="btn-group-vertical shadow">
+                        <button class="btn btn-success rounded-circle mb-2" title="Tambah Laporan Baru" style="width: 45px; height: 45px;">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="btn btn-primary rounded-circle" title="Bantuan" style="width: 45px; height: 45px;">
+                            <i class="fas fa-question"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save View Modal -->
+    <div class="modal fade" id="saveViewModel" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Simpan Tampilan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Nama Tampilan</label>
+                            <input type="text" class="form-control" placeholder="Contoh: Laporan Bulanan">
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">Jadikan Default</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-success">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Report Modal -->
+    <div class="modal fade" id="detailReportModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detail Laporan - Januari 2025</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6>Informasi Umum</h6>
+                            <table class="table table-sm">
+                                <tr>
+                                    <th>Periode</th>
+                                    <td>Januari 2025</td>
+                                </tr>
+                                <tr>
+                                    <th>Total Sampah</th>
+                                    <td>75 Kg</td>
+                                </tr>
+                                <tr>
+                                    <th>Total Poin</th>
+                                    <td>375</td>
+                                </tr>
+                                <tr>
+                                    <th>Pengguna Aktif</th>
+                                    <td>35 dari 50</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Perbandingan dengan Bulan Lalu</h6>
+                            <table class="table table-sm">
+                                <tr>
+                                    <th>Perubahan Jumlah</th>
+                                    <td class="text-success">+15 Kg (25%)</td>
+                                </tr>
+                                <tr>
+                                    <th>Perubahan Poin</th>
+                                    <td class="text-success">+75 (25%)</td>
+                                </tr>
+                                <tr>
+                                    <th>Perubahan Pengguna</th>
+                                    <td class="text-success">+5 (16.7%)</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <h6>Distribusi per Kategori</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Kategori</th>
+                                    <th>Jumlah (Kg)</th>
+                                    <th>Persentase</th>
+                                    <th>Poin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Plastik</td>
+                                    <td>30</td>
+                                    <td>40%</td>
+                                    <td>150</td>
+                                </tr>
+                                <tr>
+                                    <td>Kertas</td>
+                                    <td>15</td>
+                                    <td>20%</td>
+                                    <td>45</td>
+                                </tr>
+                                <tr>
+                                    <td>Logam</td>
+                                    <td>10</td>
+                                    <td>13.3%</td>
+                                    <td>100</td>
+                                </tr>
+                                <tr>
+                                    <td>Kaca</td>
+                                    <td>12</td>
+                                    <td>16%</td>
+                                    <td>48</td>
+                                </tr>
+                                <tr>
+                                    <td>Organik</td>
+                                    <td>8</td>
+                                    <td>10.7%</td>
+                                    <td>32</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-success">
+                        <i class="fas fa-download me-2"></i>Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Grafik Perbandingan Sampah
+        new Chart(document.getElementById('wasteComparisonChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+                datasets: [{
+                    label: 'Sampah Terkumpul (Kg)',
+                    data: [75, 65, 70, 55, 60, 50],
+                    backgroundColor: '#198754'
+                }]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `Total: ${context.raw} Kg`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Grafik Jenis Sampah
+        new Chart(document.getElementById('wasteTypeChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Plastik', 'Kertas', 'Logam', 'Kaca', 'Organik', 'Elektronik'],
+                datasets: [{
+                    data: [35, 20, 15, 15, 10, 5],
+                    backgroundColor: ['#198754', '#ffc107', '#0dcaf0', '#6c757d', '#fd7e14', '#6f42c1']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.raw}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Tambahan JavaScript untuk interaktivitas
+        document.getElementById('saveView').addEventListener('click', () => {
+            const modal = new bootstrap.Modal(document.getElementById('saveViewModel'));
+            modal.show();
+        });
+
+        // Handling untuk lihat detail report
+        document.querySelectorAll('.btn-success[title="Lihat Detail"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = new bootstrap.Modal(document.getElementById('detailReportModal'));
+                modal.show();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penukaran Poin - Trash2Cash</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Tambahan font Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #198754 0%, #0d6235 100%);
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            transition: transform 0.2s ease-in-out;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .reward-card {
+            height: 100%;
+        }
+
+        .reward-card .reward-img {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            margin-bottom: 1rem;
+        }
+
+        .reward-card .reward-img i {
+            font-size: 3rem;
+            color: #198754;
+        }
+
+        .reward-points {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(25, 135, 84, 0.9);
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+
+        .points-badge {
+            background-color: #198754;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+        }
+
+        .transaction-item {
+            transition: all 0.2s ease;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .transaction-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            color: #198754;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #198754;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: #198754;
+        }
+
+        .nav-pills .nav-link {
+            color: #198754;
+        }
+
+        .reward-categories {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar text-white">
+            <div class="sidebar-header p-3 d-flex align-items-center gap-3">
+                <a href="/index.html" class="text-white text-decoration-none">
+                    <img src="/img/logo.png" alt="Trash2Cash" height="35" class="rounded">
+                </a>
+            </div>
+            
+            <div class="sidebar-divider my-2"></div>
+
+            <div class="sidebar-menu">
+                <div class="menu-label ps-3 mb-2">
+                    <small class="text-white-50 text-uppercase">Menu Utama</small>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="dashboard-user.html" class="list-group-item list-group-item-action">
+                        <i class="fas fa-home me-2"></i>
+                        <span>Overview</span>
+                    </a>
+                    <a href="laporan-user.html" class="list-group-item list-group-item-action">
+                        <i class="fas fa-plus-circle me-2"></i>
+                        <span>Lapor Sampah</span>
+                    </a>
+                    <a href="history-user.html" class="list-group-item list-group-item-action">
+                        <i class="fas fa-history me-2"></i>
+                        <span>Riwayat</span>
+                    </a>
+                    <a href="poin-user.html" class="list-group-item list-group-item-action active">
+                        <i class="fas fa-star me-2"></i>
+                        <span>Penukaran Poin</span>
+                    </a>
+                </div>
+
+                <div class="menu-label ps-3 mb-2 mt-4">
+                    <small class="text-white-50 text-uppercase">Setting</small>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="pengaturan-user.html" class="list-group-item list-group-item-action">
+                        <i class="fas fa-cog me-2"></i>
+                        <span>Pengaturan</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="sidebar-divider my-2"></div>
+
+            <div class="sidebar-footer p-3">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="https://ui-avatars.com/api/?name=User+Name" class="rounded-circle me-2" width="32">
+                    <div class="user-info">
+                        <h6 class="mb-0">User Name</h6>
+                        <small class="text-white-50">Member</small>
+                    </div>
+                </div>
+                <a href="#help" class="btn btn-outline-light btn-sm w-100">
+                    <i class="fas fa-question-circle me-2"></i>Bantuan
+                </a>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white">
+                <div class="container-fluid">
+                    <button class="btn btn-link" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user me-2"></i>User Name
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#profile">Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="handleLogout()">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid py-4">
+                <!-- Header with Points -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card bg-light">
+                            <div class="card-body p-4">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4 class="text-success mb-1">Penukaran Poin</h4>
+                                        <p class="text-muted mb-0">Tukarkan poin Anda dengan berbagai reward menarik!</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="d-flex align-items-center">
+                                            <span class="text-muted me-2">Total Poin Anda:</span>
+                                            <span class="points-badge">75</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Navigation -->
+                <ul class="nav nav-pills mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#rewards">Katalog Reward</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#history">Riwayat Penukaran</a>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Rewards Tab -->
+                    <div class="tab-pane fade show active" id="rewards">
+                        <!-- Popular Categories -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h4 class="section-title">Kategori Reward</h4>
+                                <div class="d-flex gap-2 flex-wrap reward-categories">
+                                    <a href="#" class="btn btn-outline-success active">Semua</a>
+                                    <a href="#" class="btn btn-outline-success">Voucher</a>
+                                    <a href="#" class="btn btn-outline-success">Pulsa & Data</a>
+                                    <a href="#" class="btn btn-outline-success">Donasi</a>
+                                    <a href="#" class="btn btn-outline-success">Merchandise</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rewards Grid -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="section-title">Katalog Reward</h4>
+                            </div>
+
+                            <!-- Voucher Belanja -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card reward-card h-100">
+                                    <div class="reward-points">50 Poin</div>
+                                    <div class="reward-img">
+                                        <i class="fas fa-ticket-alt"></i>
+                                    </div>
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">Voucher Belanja</h5>
+                                        <p class="card-text small text-muted flex-grow-1">Voucher belanja senilai Rp25.000 yang dapat digunakan di berbagai merchant partner.</p>
+                                        <div class="d-grid mt-auto">
+                                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmRedeemModal">Tukar Sekarang</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pulsa -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card reward-card h-100">
+                                    <div class="reward-points">75 Poin</div>
+                                    <div class="reward-img">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">Pulsa Rp50.000</h5>
+                                        <p class="card-text small text-muted flex-grow-1">Isi ulang pulsa untuk semua operator. Langsung masuk ke nomor yang terdaftar.</p>
+                                        <div class="d-grid mt-auto">
+                                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmRedeemModal">Tukar Sekarang</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Donasi -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card reward-card h-100">
+                                    <div class="reward-points">100 Poin</div>
+                                    <div class="reward-img">
+                                        <i class="fas fa-seedling"></i>
+                                    </div>
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">Donasi Penanaman Pohon</h5>
+                                        <p class="card-text small text-muted flex-grow-1">Donasikan poin Anda untuk program penanaman pohon di daerah rawan erosi.</p>
+                                        <div class="d-grid mt-auto">
+                                            <button class="btn btn-outline-success" disabled>Poin Tidak Cukup</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Merchandise -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card reward-card h-100">
+                                    <div class="reward-points">150 Poin</div>
+                                    <div class="reward-img">
+                                        <i class="fas fa-tshirt"></i>
+                                    </div>
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">Kaos Trash2Cash</h5>
+                                        <p class="card-text small text-muted flex-grow-1">Kaos ramah lingkungan eksklusif untuk para kontributor Trash2Cash.</p>
+                                        <div class="d-grid mt-auto">
+                                            <button class="btn btn-outline-success" disabled>Poin Tidak Cukup</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- E-Sertifikat -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card reward-card h-100">
+                                    <div class="reward-points">30 Poin</div>
+                                    <div class="reward-img">
+                                        <i class="fas fa-certificate"></i>
+                                    </div>
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">E-Sertifikat</h5>
+                                        <p class="card-text small text-muted flex-grow-1">Sertifikat kontribusi digital yang dapat dibagikan ke media sosial.</p>
+                                        <div class="d-grid mt-auto">
+                                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmRedeemModal">Tukar Sekarang</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Data Internet -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card reward-card h-100">
+                                    <div class="reward-points">90 Poin</div>
+                                    <div class="reward-img">
+                                        <i class="fas fa-wifi"></i>
+                                    </div>
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">Paket Data 5GB</h5>
+                                        <p class="card-text small text-muted flex-grow-1">Paket data internet untuk semua operator. Berlaku 30 hari.</p>
+                                        <div class="d-grid mt-auto">
+                                            <button class="btn btn-outline-success" disabled>Poin Tidak Cukup</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- History Tab -->
+                    <div class="tab-pane fade" id="history">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-success">Riwayat Penukaran Poin</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="transaction-item border-bottom">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="mb-1">E-Sertifikat Kontribusi</h6>
+                                            <p class="mb-0 small text-muted">20 Mar 2025 • 10:15</p>
+                                        </div>
+                                        <div class="text-end">
+                                            <h6 class="text-danger mb-1">-30 Poin</h6>
+                                            <span class="badge bg-success">Berhasil</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="transaction-item border-bottom">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="mb-1">Voucher Belanja Rp25.000</h6>
+                                            <p class="mb-0 small text-muted">15 Mar 2025 • 14:22</p>
+                                        </div>
+                                        <div class="text-end">
+                                            <h6 class="text-danger mb-1">-50 Poin</h6>
+                                            <span class="badge bg-success">Berhasil</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="transaction-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="mb-1">Donasi Penanaman Pohon</h6>
+                                            <p class="mb-0 small text-muted">28 Feb 2025 • 09:30</p>
+                                        </div>
+                                        <div class="text-end">
+                                            <h6 class="text-danger mb-1">-100 Poin</h6>
+                                            <span class="badge bg-success">Berhasil</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Penukaran -->
+    <div class="modal fade" id="confirmRedeemModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Konfirmasi Penukaran Poin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-ticket-alt text-success fa-3x mb-3"></i>
+                        <h5>Voucher Belanja</h5>
+                        <p class="text-muted">Voucher belanja senilai Rp25.000</p>
+                        <div class="alert alert-warning">
+                            Anda akan menukarkan <strong>50 poin</strong> untuk reward ini.
+                        </div>
+                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Email Penerima</label>
+                            <input type="email" class="form-control" value="user@example.com" required>
+                            <small class="form-text text-muted">Voucher akan dikirim ke email ini</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="showSuccessToast()">Konfirmasi Penukaran</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast untuk notifikasi sukses -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="fas fa-check-circle me-2"></i>
+                    Penukaran poin berhasil! Voucher telah dikirim ke email Anda.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/dashboard.js"></script>
+
+    <script>
+        // Function to show success toast
+        function showSuccessToast() {
+            var toast = new bootstrap.Toast(document.getElementById('successToast'));
+            toast.show();
+        }
+
+        function handleLogout() {
+            // Redirect to login page
+            window.location.href = '/index.html';
+        }
+    </script>
+
+    <!-- QR Scanner Button -->
+    <div class="position-fixed bottom-0 end-0 p-4" style="z-index: 1030;">
+        <button class="btn btn-success btn-lg rounded-circle shadow" style="width: 60px; height: 60px;" data-bs-toggle="modal" data-bs-target="#qrScannerModal">
+            <i class="fas fa-qrcode"></i>
+        </button>
+    </div>
+
+    <!-- QR Scanner Modal -->
+    <div class="modal fade" id="qrScannerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Scan QR Code</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="qrScannerContainer" class="position-relative" style="min-height: 300px;">
+                        <video id="qrScanner" class="w-100"></video>
+                        <div class="position-absolute top-50 start-50 translate-middle text-center" id="qrScannerPlaceholder">
+                            <i class="fas fa-camera fa-3x text-muted mb-2"></i>
+                            <p>Meminta akses kamera...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // QR Scanner functionality
+        let videoStream;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize QR scanner when modal is shown
+            const qrScannerModal = document.getElementById('qrScannerModal');
+            qrScannerModal.addEventListener('shown.bs.modal', function() {
+                startQrScanner();
+            });
+            
+            // Stop camera when modal is hidden
+            qrScannerModal.addEventListener('hidden.bs.modal', function() {
+                stopQrScanner();
+            });
+        });
+        
+        function startQrScanner() {
+            const video = document.getElementById('qrScanner');
+            const placeholder = document.getElementById('qrScannerPlaceholder');
+            
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+                    .then(function(stream) {
+                        videoStream = stream;
+                        video.srcObject = stream;
+                        video.play();
+                        placeholder.style.display = 'none';
+                        
+                        // Here you would typically add QR code detection logic
+                        console.log("QR scanner started - add QR detection library for full functionality");
+                        
+                        // Mock successful scan after 3 seconds (for demo)
+                        setTimeout(() => {
+                            alert("QR Code terdeteksi: DROP-POINT-001");
+                        }, 3000);
+                    })
+                    .catch(function(error) {
+                        placeholder.innerHTML = `<i class="fas fa-exclamation-circle fa-3x text-danger mb-2"></i>
+                                                <p>Gagal mengakses kamera: ${error.message}</p>`;
+                        console.error("Error accessing camera: ", error);
+                    });
+            } else {
+                placeholder.innerHTML = `<i class="fas fa-exclamation-circle fa-3x text-danger mb-2"></i>
+                                        <p>Browser tidak mendukung akses kamera</p>`;
+                console.error("Browser does not support getUserMedia");
+            }
+        }
+        
+        function stopQrScanner() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => {
+                    track.stop();
+                });
+            }
+        }
+    </script>
+</body>
+</html>
