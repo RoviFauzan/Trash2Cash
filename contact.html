@@ -480,26 +480,31 @@
             this.reset();
         });
 
-        // Tambahkan fungsi handleLogin
-        function handleLogin(event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorElement = document.getElementById('loginError');
-            
-            // Simulasi login sederhana
-            if (username === 'admin' && password === 'admin') {
-                window.location.href = '/dashboard-admin.html';
-                return false;
-            } else if (username === 'user' && password === 'user') {
-                window.location.href = '/dashboard-user.html';
-                return false;
-            } else {
-                errorElement.classList.remove('d-none');
-                return false;
-            }
-        }
+// Tambahkan fungsi handleLogin
+function handleLogin(event) {
+    event.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorElement = document.getElementById('loginError');
+
+    // Cek apakah dijalankan di GitHub Pages
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const basePath = isGitHubPages ? '/Trash2Cash' : '';
+
+    // Simulasi login sederhana
+    if (username === 'admin' && password === 'admin') {
+        window.location.href = `${basePath}/dashboard-admin.html`;
+        return false;
+    } else if (username === 'user' && password === 'user') {
+        window.location.href = `${basePath}/dashboard-user.html`;
+        return false;
+    } else {
+        errorElement.classList.remove('d-none');
+        return false;
+    }
+}
+
     </script>
 </body>
 </html>
